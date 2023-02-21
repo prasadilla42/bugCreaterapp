@@ -1,0 +1,54 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='createbug.css') }}">
+{% extends 'header.html' %}
+
+{% block head %}
+
+
+<title>CREATE A BUG</title>
+{% endblock %}
+
+{% block content %}
+
+<form id="bugForm" action="{{url_for('create_bug')}}" method="post" name="create">
+    <div name="input-tag">
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title"><br><br>
+    </div>
+    <div name="input-tag">
+      <label for="description">Description:</label>
+      <textarea id="description" name="description"></textarea><br><br>
+    </div>
+    <div name="input-tag">
+      <label for="severity">Severity:</label>
+      <select id="severity" name="severity">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+        <option value="critical">Critical</option>
+      </select>
+    </div>
+        <br><br>
+    <div name="input-tag">
+      <label for="steps">Steps to Reproduce:</label>
+      <textarea id="steps" name="steps"></textarea><br><br>
+    </div>
+    <div name="input-tag">
+      <label for="expected">Expected Result:</label>
+      <textarea id="expected" name="expected"></textarea><br><br>
+    </div>
+    <div name="input-tag">
+        <label for="actual">Actual Result:</label>
+        <textarea id="actual" name="actual"></textarea><br><br>
+        </div>
+        <button id="createBug" class="btn btn-primary btn-lg">SUBMIT</button>
+    </form>
+<script src="myscript.js" type="text/javascript">
+    const form = document.getElementById("bugForm");
+    form.addEventListener("submit", function(event) {
+        // Prevent the form from submitting normally
+        event.preventDefault();
+        window.location.replace("http://127.0.0.1:5000/view_bug");
+    });
+ </script>
+{% endblock %}
+

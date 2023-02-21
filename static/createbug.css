@@ -1,0 +1,10 @@
+#bugForm{
+border:thin black solid;
+  margin:20px;
+  padding:20px;
+  background-color: #F5F5DC;
+}
+div[name=input-tag]{
+    display: grid;
+    grid-template-columns: 30% 30%;
+}

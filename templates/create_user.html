@@ -1,0 +1,42 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='createuser.css') }}">
+{% extends 'header.html' %}
+
+{% block head %}
+
+
+<title>CREATE USER</title>
+{% endblock %}
+
+{% block content %}
+<form id="createuser" action="{{url_for('create_user')}}" method="post">
+  <div name="input-tag">
+  <label for="username">Username:</label>
+  <input type="text" id="username" name="username" required><br><br>
+  </div>
+  <div name="input-tag">
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" required><br><br>
+  </div>
+  <div name="input-tag">
+  <label for="password">Password:</label>
+  <input type="password" id="password" name="password" required><br><br>
+  </div>
+  <div name="input-tag">
+  <label for="confirm-password">Confirm Password:</label>
+  <input type="password" id="confirm-password" name="confirm-password" required><br><br>
+  </div>
+  <div name="input-tag">
+  <label for="birthdate">Birthdate:</label>
+  <input type="date" id="birthdate" name="birthdate"><br><br>
+  </div>
+  <div name="input-tag">
+  <label for="gender">Gender:</label>
+  <select id="gender" name="gender">
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+    <option value="other">Other</option>
+  </select><br><br>
+  </div>
+  <button id="submitUser" class="btn btn-primary btn-lg">SUBMIT</button>
+</form>
+{% endblock %}

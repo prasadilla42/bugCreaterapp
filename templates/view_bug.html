@@ -1,0 +1,84 @@
+{% extends 'header.html' %}
+
+{% block head %}
+<title>View Bug</title>
+{% endblock %}
+
+{% block content %}
+
+BUGS TABLE
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script  type="text/javascript">
+    function changeallocation(val,id) {
+        data={id:id,username:val.value}
+        $.ajax({
+            type:"PUT",
+            url:"update_bug",
+
+            dataType: 'json',
+            contentType: 'application/json',
+            data:JSON.stringify(data),
+            success:function(data){
+                console.log('update')
+            },
+        });
+        console.log('error updating user')
+    }
+    function closeBug(id) {
+        data={id:id}
+        $.ajax({
+            type:"DELETE",
+            url:"delete_bug",
+            dataType: 'json',
+            contentType: 'application/json',
+            data:JSON.stringify(data)
+        });
+        window.location.reload();
+    };
+
+</script>
+<table id="viewBugsTable" class="table table-bordered" style="border:5px double black;">
+  <thead>
+    <tr class="selectable-row">
+      <th>Title</th>
+      <th>Description</th>
+      <th>severity </th>
+      <th>steps </th>
+      <th>Expected </th>
+      <th>Actual </th>
+      <th style="width:20%">Assigned User </th>
+      <th >Close Bug </th>
+
+    </tr>
+  </thead>
+  <tbody>
+  {% for item in bugs %}
+    <tr>
+        <td>{{item.title}}</td>
+        <td>{{item.description}}</td>
+        <td>{{item.severity}}</td>
+        <td>{{item.steps}}</td>
+        <td>{{item.expected}}</td>
+        <td>{{item.actual}}</td>
+        <td>
+            <select onchange="return changeallocation(this,'{{item._id}}');"  name="user" id="user">
+                {% for us in users %}
+                {% if item.username == us %}
+                    <option value="{{ us }}" SELECTED>{{ us }}</option>
+                {% else %}
+                <option value="{{ us }}" >{{ us }}</option>
+
+                {% endif %}
+
+                {% endfor %}
+              </select>
+        </td>
+        <td><button id="closeButton" class="btn btn-sm btn-primary" onclick="return closeBug('{{item._id}}');" >Close Bug</button></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock %}

@@ -1,0 +1,5 @@
+pymongo[srv]
+Flask==2.2.3
+dnspython==2.2.1
+python-dotenv==0.21.0
+-e .
